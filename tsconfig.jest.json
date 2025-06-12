@@ -1,0 +1,12 @@
+{
+    "extends": "./tsconfig.json",
+    "compilerOptions": {
+      "types": ["jest", "node"],
+      "allowJs": true,
+      "jsx": "react-jsx",
+      "noEmit": true,
+      "esModuleInterop": true   // ✅ Required to allow `import React from "react"`
+    },
+    "include": ["src", "jest.setup.ts"]
+  }
+  

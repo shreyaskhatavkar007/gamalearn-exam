@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Grid,
   FormControl,
@@ -41,12 +41,13 @@ const AssessmentFilters: React.FC<Props> = ({ filters, onChange, assessments, cl
       <Grid container spacing={2} sx={{ p: 2 }}>
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
           <FormControl fullWidth size="small">
-            <InputLabel>Select Area</InputLabel>
+            <InputLabel id="area-select-label">Select Area</InputLabel>
             <Select
               name="area"
               value={filters.area}
               label="Select Area"
               onChange={handleChange}
+              aria-labelledby="area-select-label"
             >
               <MenuItem value="">All</MenuItem>
               {uniqueAreas?.map((area) => (
@@ -59,12 +60,13 @@ const AssessmentFilters: React.FC<Props> = ({ filters, onChange, assessments, cl
         </Grid>
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
           <FormControl fullWidth size="small">
-            <InputLabel>Select Program</InputLabel>
+            <InputLabel id="program-select-label">Select Program</InputLabel>
             <Select
               name="program"
               value={filters.program}
               label="Select Program"
               onChange={handleChange}
+              aria-labelledby="program-select-label"
             >
               <MenuItem value="">All</MenuItem>
               {assessments?.map((assessment) => (
@@ -77,12 +79,13 @@ const AssessmentFilters: React.FC<Props> = ({ filters, onChange, assessments, cl
         </Grid>
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
           <FormControl fullWidth size="small">
-            <InputLabel>Select Course</InputLabel>
+            <InputLabel id="course-select-label">Select Course</InputLabel>
             <Select
               name="course"
               value={filters.course}
               label="Select Course"
               onChange={handleChange}
+              aria-labelledby="course-select-label"
             >
               <MenuItem value="">All</MenuItem>
               {uniqueCourses?.map((course) => (
@@ -95,24 +98,32 @@ const AssessmentFilters: React.FC<Props> = ({ filters, onChange, assessments, cl
         </Grid>
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
           <FormControl fullWidth size="small">
-            <InputLabel>Select Status</InputLabel>
+            <InputLabel id="status-select-label">Select Status</InputLabel>
             <Select
               name="status"
               value={filters.status}
               label="Select Status"
               onChange={handleChange}
+              aria-labelledby="status-select-label"
             >
               <MenuItem value="">All</MenuItem>
               {uniqueStatus?.map((status) => (
-                  <MenuItem key={status} value={status}>
-                    {status}
-                  </MenuItem>
-                ))}
+                <MenuItem key={status} value={status}>
+                  {status}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </Grid>
         <Grid size={{ xs: 12, sm: 6, md: 3 }} sx={{ display: "flex", alignItems: "end" }}>
-          <Button size="small" color="primary" onClick={clearFilters}>Reset Filters</Button>
+          <Button
+            size="small"
+            color="primary"
+            onClick={clearFilters}
+            aria-label="Reset Filters"
+          >
+            Reset Filters
+          </Button>
         </Grid>
       </Grid>
     </>

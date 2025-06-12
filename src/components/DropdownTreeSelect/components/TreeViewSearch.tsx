@@ -4,8 +4,8 @@ import { Box } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import Typography from "@mui/material/Typography";
 import { onlyUnique } from "./utils";
-import { type RecursiveValue } from "../DropDownTreeSelect";
 import { CustomTreeItem } from "./CustomTreeItem";
+import type { RecursiveValue } from "../../../types/assessment";
 
 type TreeViewSearchProps = {
   data: RecursiveValue[];
@@ -129,7 +129,7 @@ const selectNodes = (
     }
   }
   if (Array.isArray(node.children)) {
-    node.children.forEach((node) => {
+    node.children.forEach((node: RecursiveValue) => {
       array = selectNodes(node, checked, array);
     });
   }

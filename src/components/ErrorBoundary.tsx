@@ -1,4 +1,4 @@
-import React, { Component, ReactNode } from "react";
+import React, { Component, type ReactNode } from "react";
 import { Box, Button, Typography, Paper } from "@mui/material";
 import ErrorOutlineIcon from "@mui/icons-material/ErrorOutline";
 
@@ -11,7 +11,7 @@ type State = {
   error?: Error;
 };
 
-export class ErrorBoundary extends Component<Props, State> {
+class ErrorBoundary extends Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = { hasError: false };

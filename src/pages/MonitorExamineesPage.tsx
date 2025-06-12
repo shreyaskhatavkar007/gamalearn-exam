@@ -185,7 +185,7 @@ const MonitorExamineesPage: React.FC<Props> = ({ examinees, closeMonitorExamModa
       />
       <CommonDialog
         open={openDialog}
-        title="Delete Item"
+        title="Reset Timer"
         content="Are you sure you want to reset the timer?"
         confirmText="Reset"
         cancelText="Cancel"
