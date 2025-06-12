@@ -8,3 +8,7 @@ export const convertDate = (val: string) => {
         hour12: true,
       })
 };
+
+export const onlyUnique = <T>(array: T[]) => {
+  return array.filter((value, index, array) => array.indexOf(value) === index);
+};

@@ -13,6 +13,9 @@ const ExamineeDetailsModal: React.FC<Props> = ({
 }) => {
   return (
     <Box
+      role="dialog"
+      aria-labelledby="examinee-details-title"
+      aria-describedby="examinee-details-description"
       sx={{
         maxWidth: "50vw",
         maxHeight: "90vh",
@@ -21,7 +24,8 @@ const ExamineeDetailsModal: React.FC<Props> = ({
         mt: "5vh",
         borderRadius: 2,
         boxShadow: 24,
-        overflowY: "auto",
+        display: "flex",
+        flexDirection: "column",
       }}
     >
       <Box
@@ -34,17 +38,21 @@ const ExamineeDetailsModal: React.FC<Props> = ({
           borderTopLeftRadius: 2,
           borderTopRightRadius: 2,
           alignItems: "center",
+          flexShrink: 0,
         }}
       >
-        <Typography fontWeight={600}>
+        <Typography id="examinee-details-title" fontWeight={600}>
           {examineeDetails?.fullName} - Examinee Details
         </Typography>
-        <Button onClick={closeExamineeModal}>
+        <Button
+          aria-label="Close Examinee Details Modal"
+          onClick={closeExamineeModal
+        }>
           <CloseIcon />
         </Button>
       </Box>
 
-      <Box px={3} py={2}>
+      <Box px={3} py={2} id="examinee-details-description" sx={{ overflowY: "auto", flexGrow: 1 }}>
         <Stack spacing={1}>
           <Typography>
             <strong>Username:</strong> {examineeDetails?.username}

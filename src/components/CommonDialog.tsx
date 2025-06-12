@@ -36,6 +36,8 @@ export const CommonDialog: React.FC<CommonDialogProps> = ({
         if (disableBackdropClick && (reason === "backdropClick" || reason === "escapeKeyDown")) return;
         onClose();
       }}
+      aria-labelledby={title ?? 'dialog-title'}
+      aria-describedby={typeof content === "string" ? content : undefined}
     >
       {title && <DialogTitle>{title}</DialogTitle>}
 
@@ -48,9 +50,16 @@ export const CommonDialog: React.FC<CommonDialogProps> = ({
       </DialogContent>
 
       <DialogActions>
-        <Button onClick={onClose}>{cancelText}</Button>
+        <Button onClick={onClose} aria-label={cancelText}>
+          {cancelText}
+        </Button>
         {onConfirm && (
-          <Button onClick={onConfirm} variant="contained" color="primary">
+          <Button
+            onClick={onConfirm}
+            variant="contained"
+            color="primary"
+            aria-label={confirmText}
+          >
             {confirmText}
           </Button>
         )}

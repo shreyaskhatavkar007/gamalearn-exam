@@ -3,16 +3,15 @@ import { useEffect, useState, type JSX } from "react";
 import { Box } from "@mui/material";
 import Checkbox from "@mui/material/Checkbox";
 import Typography from "@mui/material/Typography";
-import { onlyUnique } from "./utils";
 import { CustomTreeItem } from "./CustomTreeItem";
 import type { RecursiveValue } from "../../../types/assessment";
+import { onlyUnique } from "../../../utils/utils";
 
 type TreeViewSearchProps = {
   data: RecursiveValue[];
   setListId: (value: string[]) => void;
   inputText?: string;
   groupsList?: string[];
-
   listId?: string[];
 };
 export const TreeViewSearch = ({
@@ -40,11 +39,12 @@ export const TreeViewSearch = ({
       sx={{ overflow: "hidden" }}
       expandedItems={expand}
       expansionTrigger="content"
+      role="tree"
     >
       {treeNodes?.some((v) => v) ? (
         treeNodes
       ) : (
-        <Typography padding={3} paddingLeft={2}>
+        <Typography padding={3} paddingLeft={2} role="alert">
           No options
         </Typography>
       )}
@@ -106,7 +106,7 @@ const renderTreeNodesSearch = (
                         listId ? listId.includes(node.id) : false
                       }
                     />
-                    {node.label}
+                      {node.label}
                   </Box>
                 }
               >

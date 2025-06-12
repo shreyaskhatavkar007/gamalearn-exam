@@ -30,30 +30,48 @@ const AssessmentsPage: React.FC<Props> = ({ setShowExamineeModal }) => {
         Downloaded Assessments
       </Typography>
 
-      <Paper elevation={2} sx={{
-        height: {
-          md: "calc(100vh - 100px)"
-        },
-        display: 'flex',
-        flexDirection: 'column', 
-      }}>
+      <Paper
+        elevation={2}
+        sx={{
+          height: {
+            md: "calc(100vh - 100px)",
+          },
+          display: "flex",
+          flexDirection: "column",
+        }}
+        role="region"
+        aria-labelledby="assessments-section"
+      >
         <Box sx={{ flexShrink: 0 }}>
-          <AssessmentFilters filters={filters} onChange={setFilters} assessments={mockAssessments} clearFilters={() => setFilters(initialFilters)} />
-          <Divider sx={{ bgcolor: 'grey.300', height: '1px', my: 1 }} />
+          <AssessmentFilters
+            filters={filters}
+            onChange={setFilters}
+            assessments={mockAssessments}
+            clearFilters={() => setFilters(initialFilters)}
+            aria-label="Assessment Filters"
+          />
+          <Divider sx={{ bgcolor: "grey.300", height: "1px", my: 1 }} role="separator" />
         </Box>
         <Box
           sx={{
             flexGrow: 1,
-            overflow: 'auto',
+            overflow: "auto",
           }}
+          role="table"
+          aria-label="Assessments Table"
         >
-          <AssessmentsTable filters={filters} onSync={handleSync} setShowExamineeModal={setShowExamineeModal} />
+          <AssessmentsTable
+            filters={filters}
+            onSync={handleSync}
+            setShowExamineeModal={setShowExamineeModal}
+          />
         </Box>
       </Paper>
       <ToastContainerComponent
         open={syncSuccess}
         onClose={() => setSyncSuccess(false)}
         message="Submissions synced successfully!"
+        aria-live="polite"
       />
     </Box>
   );

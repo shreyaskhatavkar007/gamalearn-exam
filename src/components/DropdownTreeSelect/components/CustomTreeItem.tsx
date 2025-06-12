@@ -20,7 +20,7 @@ export const CustomTreeItem = ({
   label,
   children,
 }: CustomTreeItemProps) => {
-  const handleToggle = (e: React.MouseEvent) => {
+  const handleToggle = (e: React.MouseEvent | React.KeyboardEvent) => {
     e.stopPropagation();
     setExpand(
       expand.includes(node.id)
@@ -38,6 +38,15 @@ export const CustomTreeItem = ({
         cursor: "pointer",
       }}
       onClick={handleToggle}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          handleToggle(e);
+        }
+      }}
+      role="button"
+      tabIndex={0}
+      aria-expanded={expand.includes(node.id)}
+      aria-label={`Toggle ${node.label}`}
     >
       {children}
     </Box>
@@ -52,6 +61,8 @@ export const CustomTreeItem = ({
         expandIcon: ChevronRightIcon,
         iconContainer: MyIconContainer,
       }}
+      aria-expanded={expand.includes(node.id)}
+      aria-label={`Tree item ${node.label}`}
     >
       {children}
     </TreeItem>

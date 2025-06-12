@@ -46,7 +46,11 @@ const DropDownTreeSelect = ({
 
   const renderChips = () => {
     return (
-      <Box sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}>
+      <Box
+        sx={{ display: "flex", flexWrap: "wrap", gap: 0.5 }}
+        role="list"
+        aria-label="Selected items"
+      >
         {listId
           ? listId
               .filter((v) => !groupsList.includes(v))
@@ -70,6 +74,8 @@ const DropDownTreeSelect = ({
                           }
                     }
                     label={itemsList?.find((v) => v.id === value)?.label ?? ""}
+                    role="listitem"
+                    aria-label={`Remove ${itemsList?.find((v) => v.id === value)?.label ?? ""}`}
                   />
                 );
               })
@@ -114,8 +120,13 @@ const DropDownTreeSelect = ({
           {...params}
           onChange={(v) => setInputText(v.target.value)}
           placeholder="Select Group"
+          aria-label="Select Group"
         />
       )}
+      aria-labelledby="dropdown-tree-select-label"
+      role="combobox"
+      aria-expanded={Boolean(inputText)}
+      aria-disabled={disabled}
     />
   );
 };

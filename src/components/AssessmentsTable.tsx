@@ -53,7 +53,14 @@ const AssessmentsTable: React.FC<Props> = ({ filters, onSync, setShowExamineeMod
       renderCell: (params) => {
         const color = 
           params.value === "Not Available" ? "warning" : "success";
-        return <Chip label={params.value} color={color} />;
+        return (
+          <Chip 
+            label={params.value} 
+            color={color} 
+            role="status" 
+            aria-label={`Status: ${params.value}`} 
+          />
+        );
       },
     },
     {
@@ -62,11 +69,12 @@ const AssessmentsTable: React.FC<Props> = ({ filters, onSync, setShowExamineeMod
       flex: 1.5,
       renderCell: (params) => (
         <Button
-            startIcon={<PeopleSharpIcon />}
-            onClick={() => setShowExamineeModal({
-                show: true,
-                examinees: mockExaminees.filter(a => a.assessmentId === params.row.id) || [],
-            })}
+          startIcon={<PeopleSharpIcon />}
+          onClick={() => setShowExamineeModal({
+              show: true,
+              examinees: mockExaminees.filter(a => a.assessmentId === params.row.id) || [],
+          })}
+          aria-label={`Monitor examinees for assessment ${params.row.name}`}
         >
           {mockExaminees.filter(a => a.assessmentId === params.row.id)?.length || 0}
         </Button>
@@ -81,6 +89,7 @@ const AssessmentsTable: React.FC<Props> = ({ filters, onSync, setShowExamineeMod
           variant="contained"
           size="small"
           onClick={onSync}
+          aria-label="Sync assessments"
         >
           Sync
         </Button>
@@ -128,6 +137,7 @@ const AssessmentsTable: React.FC<Props> = ({ filters, onSync, setShowExamineeMod
         pageSizeOptions={[10, 25, 50]}
         paginationModel={paginationModel}
         onPaginationModelChange={setPaginationModel}
+        aria-label="Assessments Table"
       />
     </Box>
     </Box>

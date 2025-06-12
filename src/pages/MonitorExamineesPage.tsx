@@ -69,6 +69,8 @@ const MonitorExamineesPage: React.FC<Props> = ({ examinees, closeMonitorExamModa
         boxShadow: 24,
         overflowY: 'auto'
       }}
+      role="dialog"
+      aria-labelledby="monitor-examinees-title"
     >
       <Box 
         sx={{
@@ -82,11 +84,12 @@ const MonitorExamineesPage: React.FC<Props> = ({ examinees, closeMonitorExamModa
           alignItems: 'center',
         }}
       >
-        <Typography>
+        <Typography id="monitor-examinees-title">
           Monitoring Exam Submissions – Assessment #{assessmentId}
         </Typography>
         <Button
           onClick={closeMonitorExamModal}
+          aria-label="Close monitoring exam modal"
         >
           <CloseIcon />
         </Button>
@@ -105,24 +108,24 @@ const MonitorExamineesPage: React.FC<Props> = ({ examinees, closeMonitorExamModa
             </Typography>
           </Grid>
           <Grid size={{ xs: 12, md: 6, sm: 6 }}>
-          <Typography color="primary" variant="h6">
-            <Box component="span" color="primary.main">
-              Exam Date:&nbsp;
-            </Box>
-            <Box component="span" color="text.primary">
-              {`${convertDate(examData?.startDate || '')} - ${convertDate(examData?.endDate || '')}` || "N/A"}
-            </Box>
+            <Typography color="primary" variant="h6">
+              <Box component="span" color="primary.main">
+                Exam Date:&nbsp;
+              </Box>
+              <Box component="span" color="text.primary">
+                {`${convertDate(examData?.startDate || '')} - ${convertDate(examData?.endDate || '')}` || "N/A"}
+              </Box>
             </Typography>
           </Grid>
           <Grid size={{ xs: 12, md: 6, sm: 6 }}>
-          <Typography color="primary" variant="h6">
-            <Box component="span" color="primary.main">
-              Exam Area:&nbsp;
-            </Box>
-            <Box component="span" color="text.primary">
-              {examData?.area || "N/A"}
-            </Box>
-          </Typography>
+            <Typography color="primary" variant="h6">
+              <Box component="span" color="primary.main">
+                Exam Area:&nbsp;
+              </Box>
+              <Box component="span" color="text.primary">
+                {examData?.area || "N/A"}
+              </Box>
+            </Typography>
           </Grid>
           <Grid size={{ xs: 12, md: 6, sm: 6 }}>
             <Typography color="primary" variant="h6">
@@ -154,11 +157,16 @@ const MonitorExamineesPage: React.FC<Props> = ({ examinees, closeMonitorExamModa
         />
       </Box>
 
-      <Modal open={!!showExamineeModal?.show} onClose={closeExamineeModal}>
+      <Modal
+        open={!!showExamineeModal?.show}
+        onClose={closeExamineeModal}
+        aria-labelledby="examinee-details-title"
+        aria-describedby="examinee-details-description"
+      >
         <Suspense
           fallback={
             <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
-              <CircularProgress />
+              <CircularProgress aria-label="Loading examinee details" />
             </Box>
           }
         >
@@ -172,16 +180,19 @@ const MonitorExamineesPage: React.FC<Props> = ({ examinees, closeMonitorExamModa
         open={resetTimer}
         onClose={() => setResetTimer(false)}
         message="Timer reset successfully!"
+        aria-live="polite"
       />
       <ToastContainerComponent
         open={restartSession}
         onClose={() => setRestartSession(false)}
         message="Session restarted successfully!"
+        aria-live="polite"
       />
       <ToastContainerComponent
         open={paperMode}
         onClose={() => setPaperMode(false)}
         message="Switched to paper mode successfully!"
+        aria-live="polite"
       />
       <CommonDialog
         open={openDialog}
@@ -194,6 +205,8 @@ const MonitorExamineesPage: React.FC<Props> = ({ examinees, closeMonitorExamModa
           setResetTimer(true);
           setOpenDialog(false);
         }}
+        aria-labelledby="reset-timer-dialog-title"
+        aria-describedby="reset-timer-dialog-description"
       />
     </Box>
   );

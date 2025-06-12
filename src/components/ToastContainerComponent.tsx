@@ -22,8 +22,16 @@ const ToastContainerComponent: React.FC<ToastProps> = ({
       autoHideDuration={duration}
       onClose={onClose}
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      aria-live="polite"
+      aria-describedby="toast-message"
     >
-      <Alert severity={severity} onClose={onClose} sx={{ width: "100%" }}>
+      <Alert
+        severity={severity}
+        onClose={onClose}
+        sx={{ width: "100%" }}
+        role="alert"
+        id="toast-message"
+      >
         {message}
       </Alert>
     </Snackbar>

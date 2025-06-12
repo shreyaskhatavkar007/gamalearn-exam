@@ -41,6 +41,7 @@ export const SimulateError = () => {
       size="small"
       color="error"
       onClick={() => setThrowError(true)}
+      aria-label="Simulate error for testing"
     >
       Error Test
     </Button>
@@ -48,48 +49,47 @@ export const SimulateError = () => {
 };
 
 const ExamineesFilters: React.FC<Props> = ({ filters, onChange, examinees, clearFilters, groups }) => {
-    const [inputValue, setInputValue] = useState(filters.examinee);
-    const uniqueAreas = Array.from(new Set(examinees.map((e) => e.area)));
-    const uniqueStatus = Array.from(new Set(examinees.map((e) => e.status)));
+  const [inputValue, setInputValue] = useState(filters.examinee);
+  const uniqueAreas = Array.from(new Set(examinees.map((e) => e.area)));
+  const uniqueStatus = Array.from(new Set(examinees.map((e) => e.status)));
 
-    const [listId, setListId] = useState<string[]>([]);
+  const [listId, setListId] = useState<string[]>([]);
 
-    useEffect(() => {
-      const handler = setTimeout(() => {
-        handleAutocompleteChange(inputValue);
-      }, 300);
+  useEffect(() => {
+    const handler = setTimeout(() => {
+      handleAutocompleteChange(inputValue);
+    }, 300);
 
     return () => clearTimeout(handler);
-    }, [inputValue]);
+  }, [inputValue]);
 
-    useEffect(() => {
-      onChange({ ...filters, group: listId.length ? listId : [] });
-    }, [listId]);
+  useEffect(() => {
+    onChange({ ...filters, group: listId.length ? listId : [] });
+  }, [listId]);
 
   const handleChange = (e: SelectChangeEvent) => {
     onChange({ ...filters, [e.target.name]: e.target.value });
   };
 
-  const handleAutocompleteChange = (
-    value: string | null
-  ) => {
+  const handleAutocompleteChange = (value: string | null) => {
     onChange({ ...filters, examinee: value || "" });
   };
 
   return (
     <>
-      <Typography variant="h6" sx={{ p: 2, pb: 0, color: "primary.main" }}>
+      <Typography variant="h6" sx={{ p: 2, pb: 0, color: "primary.main" }} id="filters-heading">
         Filters
       </Typography>
-      <Grid container spacing={2} sx={{ p: 2 }}>
+      <Grid container spacing={2} sx={{ p: 2 }} aria-labelledby="filters-heading">
         <Grid size={{ xs: 12, md: 3, sm: 6 }}>
           <FormControl fullWidth size="small">
-            <InputLabel>Select Area</InputLabel>
+            <InputLabel id="area-select-label">Select Area</InputLabel>
             <Select
               name="area"
               value={filters.area}
               label="Select Area"
               onChange={handleChange}
+              aria-labelledby="area-select-label"
             >
               <MenuItem value="">All</MenuItem>
               {uniqueAreas?.map((area) => (
@@ -102,50 +102,69 @@ const ExamineesFilters: React.FC<Props> = ({ filters, onChange, examinees, clear
         </Grid>
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
           <FormControl fullWidth size="small">
-            <DropDownTreeSelect data={groups} setListId={setListId} listId={listId} />
-          </FormControl>
-        </Grid>
-        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
-          <FormControl fullWidth size="small">
-            <Autocomplete
-                size="small"
-                sx={{ minWidth: 200 }}
-                options={examinees.map((e) => e.username)}
-                inputValue={inputValue}
-                onInputChange={(_, newInputValue) => setInputValue(newInputValue)}
-                onChange={(_, newValue) => {
-                  setInputValue(newValue || "");
-                  handleAutocompleteChange(newValue);
-                }}
-                freeSolo
-                renderInput={(params) => <TextField {...params} label="Search Examinee" />}
+            <DropDownTreeSelect
+              data={groups}
+              setListId={setListId}
+              listId={listId}
+              aria-label="Select Group"
             />
           </FormControl>
         </Grid>
         <Grid size={{ xs: 12, sm: 6, md: 3 }}>
           <FormControl fullWidth size="small">
-            <InputLabel>Select Status</InputLabel>
+            <Autocomplete
+              size="small"
+              sx={{ minWidth: 200 }}
+              options={examinees.map((e) => e.username)}
+              inputValue={inputValue}
+              onInputChange={(_, newInputValue) => setInputValue(newInputValue)}
+              onChange={(_, newValue) => {
+                setInputValue(newValue || "");
+                handleAutocompleteChange(newValue);
+              }}
+              freeSolo
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Search Examinee"
+                  aria-label="Search Examinee"
+                />
+              )}
+            />
+          </FormControl>
+        </Grid>
+        <Grid size={{ xs: 12, sm: 6, md: 3 }}>
+          <FormControl fullWidth size="small">
+            <InputLabel id="status-select-label">Select Status</InputLabel>
             <Select
               name="status"
               value={filters.status}
               label="Select Status"
               onChange={handleChange}
+              aria-labelledby="status-select-label"
             >
               <MenuItem value="">All</MenuItem>
               {uniqueStatus?.map((status) => (
-                  <MenuItem key={status} value={status}>
-                    {status}
-                  </MenuItem>
-                ))}
+                <MenuItem key={status} value={status}>
+                  {status}
+                </MenuItem>
+              ))}
             </Select>
           </FormControl>
         </Grid>
         <Grid size={{ xs: 12, sm: 6, md: 6 }} sx={{ display: "flex", alignItems: "end" }}>
-          <Button size="small" color="primary" onClick={() => {
-            clearFilters?.();
-            setInputValue("");
-            setListId([]);
-          }}>Reset Filters</Button>
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => {
+              clearFilters?.();
+              setInputValue("");
+              setListId([]);
+            }}
+            aria-label="Reset Filters"
+          >
+            Reset Filters
+          </Button>
         </Grid>
         <Grid size={{ xs: 12, sm: 6, md: 6 }} sx={{ display: "flex", alignItems: "end", justifyContent: "flex-end" }}>
           <SimulateError />
