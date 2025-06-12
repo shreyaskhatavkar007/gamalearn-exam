@@ -8,7 +8,8 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "test": "jest --config jest.config.ts"
+    "test": "jest --config jest.config.ts",
+    "test-coverage": "jest --config jest.config.ts --coverage"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -18,7 +19,6 @@
     "@mui/material": "^7.1.1",
     "@mui/x-data-grid": "^8.5.1",
     "@mui/x-tree-view": "^8.5.1",
-    "@tailwindcss/vite": "^4.1.8",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.2",
@@ -47,7 +47,6 @@
     "jest-environment-jsdom": "^30.0.0",
     "jsdom": "^26.1.0",
     "postcss": "^8.5.4",
-    "tailwindcss": "^4.1.8",
     "ts-jest": "^29.4.0",
     "ts-node": "^10.9.2",
     "typescript": "~5.8.3",

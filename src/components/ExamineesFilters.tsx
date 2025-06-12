@@ -86,12 +86,13 @@ const ExamineesFilters: React.FC<Props> = ({ filters, onChange, examinees, clear
             <InputLabel id="area-select-label">Select Area</InputLabel>
             <Select
               name="area"
+              data-testid="select-area"
               value={filters.area}
               label="Select Area"
               onChange={handleChange}
               aria-labelledby="area-select-label"
             >
-              <MenuItem value="">All</MenuItem>
+              <MenuItem value="All">None</MenuItem>
               {uniqueAreas?.map((area) => (
                 <MenuItem key={area} value={area}>
                   {area}
@@ -126,6 +127,7 @@ const ExamineesFilters: React.FC<Props> = ({ filters, onChange, examinees, clear
               renderInput={(params) => (
                 <TextField
                   {...params}
+                  data-testid="examinee-search"
                   label="Search Examinee"
                   aria-label="Search Examinee"
                 />
@@ -143,7 +145,7 @@ const ExamineesFilters: React.FC<Props> = ({ filters, onChange, examinees, clear
               onChange={handleChange}
               aria-labelledby="status-select-label"
             >
-              <MenuItem value="">All</MenuItem>
+              <MenuItem value="">None</MenuItem>
               {uniqueStatus?.map((status) => (
                 <MenuItem key={status} value={status}>
                   {status}

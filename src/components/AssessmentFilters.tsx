@@ -49,7 +49,7 @@ const AssessmentFilters: React.FC<Props> = ({ filters, onChange, assessments, cl
               onChange={handleChange}
               aria-labelledby="area-select-label"
             >
-              <MenuItem value="">All</MenuItem>
+              <MenuItem value="">None</MenuItem>
               {uniqueAreas?.map((area) => (
                 <MenuItem key={area} value={area}>
                   {area}
@@ -68,7 +68,7 @@ const AssessmentFilters: React.FC<Props> = ({ filters, onChange, assessments, cl
               onChange={handleChange}
               aria-labelledby="program-select-label"
             >
-              <MenuItem value="">All</MenuItem>
+              <MenuItem value="">None</MenuItem>
               {assessments?.map((assessment) => (
                 <MenuItem key={assessment.id} value={assessment.program}>
                   {assessment.program}
@@ -87,7 +87,7 @@ const AssessmentFilters: React.FC<Props> = ({ filters, onChange, assessments, cl
               onChange={handleChange}
               aria-labelledby="course-select-label"
             >
-              <MenuItem value="">All</MenuItem>
+              <MenuItem value="">None</MenuItem>
               {uniqueCourses?.map((course) => (
                 <MenuItem key={course} value={course}>
                   {course}
@@ -106,7 +106,7 @@ const AssessmentFilters: React.FC<Props> = ({ filters, onChange, assessments, cl
               onChange={handleChange}
               aria-labelledby="status-select-label"
             >
-              <MenuItem value="">All</MenuItem>
+              <MenuItem value="">None</MenuItem>
               {uniqueStatus?.map((status) => (
                 <MenuItem key={status} value={status}>
                   {status}
