@@ -25,7 +25,7 @@ const AssessmentsPage: React.FC<Props> = ({ setShowExamineeModal }) => {
   };
 
   return (
-    <Box p={2}>
+    <Box p={2} py={0}>
       <Typography variant="h5" mb={2}>
         Downloaded Assessments
       </Typography>
@@ -34,7 +34,7 @@ const AssessmentsPage: React.FC<Props> = ({ setShowExamineeModal }) => {
         elevation={2}
         sx={{
           height: {
-            md: "calc(100vh - 100px)",
+            md: "calc(100vh - 80px)",
           },
           display: "flex",
           flexDirection: "column",
