@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { DataGrid, type GridColDef } from "@mui/x-data-grid";
 import { Box, Button, Chip, Stack } from "@mui/material";
 import type { Examinee } from "../types/assessment";
@@ -15,19 +15,10 @@ interface Props {
 }
 
 const ExamineesTable: React.FC<Props> = ({ filters, examinees, openExamineeModal, handleResetTimer, handleRestartSession, handlePaperMode }) => {
-  const [loadingTable, setLoadingTable] = useState(false);
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
     pageSize: 10,
   });
-
-  // useEffect(() => {
-  //   setLoadingTable(true);
-  //   const fakeTimer = setTimeout(() => {
-  //     setLoadingTable(false);
-  //   }, 1500);
-  //   return () => clearTimeout(fakeTimer);
-  // }, [filters]);
 
   const filtered = useMemo(() => {
     return examinees.filter((e) => {
@@ -139,7 +130,6 @@ const ExamineesTable: React.FC<Props> = ({ filters, examinees, openExamineeModal
       <Box sx={{ minWidth: 900, p: 2 }}>
         <DataGrid
           disableRowSelectionOnClick
-          loading={loadingTable}
           rows={filtered}
           columns={columns}
           localeText={{
