@@ -28,9 +28,6 @@ export interface GroupNode {
     timeElapsed: string;
     status: "Student Submission" | "Absent" | "In Progress";
   }
-
-  export type RecursiveValue = {
-    id: string;
-    label: string;
+  export type RecursiveValue = Pick<GroupNode, "id" | "label"> & {
     children?: RecursiveValue[];
   };

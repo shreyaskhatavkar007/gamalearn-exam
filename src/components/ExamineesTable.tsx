@@ -21,13 +21,13 @@ const ExamineesTable: React.FC<Props> = ({ filters, examinees, openExamineeModal
     pageSize: 10,
   });
 
-  useEffect(() => {
-    setLoadingTable(true);
-    const fakeTimer = setTimeout(() => {
-      setLoadingTable(false);
-    }, 1500);
-    return () => clearTimeout(fakeTimer);
-  }, [filters]);
+  // useEffect(() => {
+  //   setLoadingTable(true);
+  //   const fakeTimer = setTimeout(() => {
+  //     setLoadingTable(false);
+  //   }, 1500);
+  //   return () => clearTimeout(fakeTimer);
+  // }, [filters]);
 
   const filtered = useMemo(() => {
     return examinees.filter((e) => {
@@ -180,4 +180,4 @@ const ExamineesTable: React.FC<Props> = ({ filters, examinees, openExamineeModal
   );
 };
 
-export default ExamineesTable;
+export default React.memo(ExamineesTable);

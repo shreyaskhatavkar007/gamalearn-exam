@@ -8,7 +8,7 @@ import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
 import rtlPlugin from 'stylis-plugin-rtl';
 import { prefixer } from 'stylis';
-import { LanguageToggle } from './components/DropdownTreeSelect/components/LanguageToggle';
+import { LanguageToggle } from './components/LanguageToggle';
 
 interface ExamineeModalState {
   examinees: Examinee[];

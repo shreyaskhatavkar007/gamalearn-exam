@@ -1,4 +1,4 @@
-import { lazy, Suspense, useState } from "react";
+import React, { lazy, Suspense, useState } from "react";
 import { Box, Typography, Grid, Modal, Button, Divider, CircularProgress } from "@mui/material";
 import { groups, mockAssessments } from "../data/mockAssessments";
 import type { Examinee } from "../types/assessment";
@@ -212,4 +212,4 @@ const MonitorExamineesPage: React.FC<Props> = ({ examinees, closeMonitorExamModa
   );
 };
 
-export default MonitorExamineesPage;
+export default React.memo(MonitorExamineesPage);
