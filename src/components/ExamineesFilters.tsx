@@ -92,7 +92,7 @@ const ExamineesFilters: React.FC<Props> = ({ filters, onChange, examinees, clear
               onChange={handleChange}
               aria-labelledby="area-select-label"
             >
-              <MenuItem value="All">None</MenuItem>
+              <MenuItem value="">None</MenuItem>
               {uniqueAreas?.map((area) => (
                 <MenuItem key={area} value={area}>
                   {area}

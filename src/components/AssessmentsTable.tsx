@@ -14,19 +14,10 @@ interface Props {
 }
 
 const AssessmentsTable: React.FC<Props> = ({ filters, onSync, setShowExamineeModal }) => {
-  const [loadingTable, setLoadingTable] = useState(false);
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
     pageSize: 10,
   });
-
-  useEffect(() => {
-    setLoadingTable(true);
-    const fakeTimer = setTimeout(() => {
-      setLoadingTable(false);
-    }, 1500);
-    return () => clearTimeout(fakeTimer);
-  }, [filters]);
 
   const filteredData = useMemo(() => {
     return mockAssessments.filter((a) => {
@@ -101,7 +92,6 @@ const AssessmentsTable: React.FC<Props> = ({ filters, onSync, setShowExamineeMod
     <Box sx={{ width: '100%', overflowX: 'auto' }}>
       <Box sx={{ minWidth: 900, p: 2 }}>
       <DataGrid
-        loading={loadingTable}
         disableRowSelectionOnClick
         rows={filteredData}
         getRowHeight={() => 'auto'}
