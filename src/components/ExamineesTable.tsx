@@ -1,6 +1,6 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { DataGrid, type GridColDef } from "@mui/x-data-grid";
-import { Box, Button, Chip, Stack } from "@mui/material";
+import { Box, Button, Chip, CircularProgress, Stack } from "@mui/material";
 import type { Examinee } from "../types/assessment";
 import type { FilterState } from "./ExamineesFilters";
 import { convertDate } from "../utils/utils";
@@ -15,10 +15,19 @@ interface Props {
 }
 
 const ExamineesTable: React.FC<Props> = ({ filters, examinees, openExamineeModal, handleResetTimer, handleRestartSession, handlePaperMode }) => {
+  const [loadingTable, setLoadingTable] = useState(false);
   const [paginationModel, setPaginationModel] = useState({
     page: 0,
     pageSize: 10,
   });
+
+  useEffect(() => {
+    setLoadingTable(true);
+    const fakeTimer = setTimeout(() => {
+      setLoadingTable(false);
+    }, 500);
+    return () => clearTimeout(fakeTimer);
+  }, []);
 
   const filtered = useMemo(() => {
     return examinees.filter((e) => {
@@ -31,7 +40,7 @@ const ExamineesTable: React.FC<Props> = ({ filters, examinees, openExamineeModal
     });
   }, [filters]);
 
-  const columns: GridColDef[] = [
+  const columns: GridColDef[] = useMemo(() => [
     {
       field: "username",
       headerName: "Username",
@@ -123,11 +132,17 @@ const ExamineesTable: React.FC<Props> = ({ filters, examinees, openExamineeModal
         );
       },
     },
-  ];
+  ], [filters]);
+
 
   return (
     <Box sx={{ width: '100%', overflowX: 'auto' }}>
       <Box sx={{ minWidth: 900, p: 2 }}>
+        {loadingTable ? (
+          <Box display="flex" justifyContent="center" alignItems="center" height="100px">
+            <CircularProgress aria-label="Loading examinee details" />
+          </Box>
+        ) : (
         <DataGrid
           disableRowSelectionOnClick
           rows={filtered}
@@ -164,7 +179,7 @@ const ExamineesTable: React.FC<Props> = ({ filters, examinees, openExamineeModal
           paginationModel={paginationModel}
           onPaginationModelChange={setPaginationModel}
           aria-label="Examinees Table"
-        />
+        />)}
       </Box>
     </Box>
   );
