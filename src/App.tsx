@@ -1,6 +1,6 @@
 import { lazy, Suspense, useState } from 'react';
 import AssessmentsPage from './pages/AssessmentsPage';
-import { CssBaseline, Box, CircularProgress, Modal } from '@mui/material';
+import { CssBaseline, Box, CircularProgress, Modal, Button } from '@mui/material';
 import type { Examinee } from './types/assessment';
 import ErrorBoundary from './components/ErrorBoundary';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -9,6 +9,7 @@ import createCache from '@emotion/cache';
 import rtlPlugin from 'stylis-plugin-rtl';
 import { prefixer } from 'stylis';
 import { LanguageToggle } from './components/LanguageToggle';
+import useAuthenticated from './hooks/useAuthenticated';
 
 interface ExamineeModalState {
   examinees: Examinee[];
@@ -18,6 +19,7 @@ interface ExamineeModalState {
 const MonitorExamineesPage = lazy(() => import('./pages/MonitorExamineesPage'));
 
 function App() {
+  const { logout } = useAuthenticated();
   const [showExamineeModal, setShowExamineeModal] = useState<ExamineeModalState>({
     examinees: [],
     show: false,
@@ -50,6 +52,7 @@ function App() {
               alignItems: 'center',
             }}
           >
+            <Button sx={{ marginRight: 2 }} onClick={logout}>Logout</Button>
             <LanguageToggle
               currentDir={direction}
               setDir={setDirection}

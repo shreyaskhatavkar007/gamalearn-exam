@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useMemo, useState } from "react";
 import { DataGrid, type GridColDef } from "@mui/x-data-grid";
 import { Box, Button, Chip } from "@mui/material";
 import type { FilterState } from "./AssessmentFilters";
